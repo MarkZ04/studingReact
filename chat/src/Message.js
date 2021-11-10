@@ -1,4 +1,4 @@
-function Message(props) {
+const Message = (props) => {
   return (
     <div className="message">
       {props.messageText}
