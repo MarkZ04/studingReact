@@ -1,0 +1,21 @@
+.message {
+  margin: 0 0 20px 0;
+  padding: 10px;
+  width: fit-content;
+  border: 1px solid rgb(3, 199, 199);
+  border-radius: 10px;
+  color: #182533;
+  background-color: #2b5278;
+  font-size: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: end;
+}
+
+.author {
+  font-size: 10px;
+}
+
+.authorUser {
+  align-self: end;
+}

@@ -1,0 +1,9 @@
+.app {
+  padding: 40px;
+  display: grid;
+  grid-template-columns: 3fr 9fr;
+  border: 1px solid rgb(5, 155, 155);
+  border-radius: 10px;
+  color: blue;
+  background-color: #1a293a;
+}
