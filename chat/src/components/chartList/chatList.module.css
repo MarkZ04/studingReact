@@ -1,6 +1,6 @@
 .chatList {
-
   border: 1px solid rgb(5, 155, 155);
   border-radius: 5px;
+  overflow-y: auto;
 }
 

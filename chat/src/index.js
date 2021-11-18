@@ -2,8 +2,10 @@ import React from 'react';
 import { ThemeProvider, createTheme } from '@mui/material';
 import 'react-devtools';
 import ReactDOM from 'react-dom';
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 import './index.css';
-import { App } from './components';
+import { ChatPage, ProfilePage } from "./pages";
+
 
 const lightTheme = createTheme({
   theme: {
@@ -13,7 +15,13 @@ const lightTheme = createTheme({
 
 ReactDOM.render(
   <ThemeProvider theme={lightTheme}>
-    <App />
+    <BrowserRouter>
+      <Routes>
+        <Route path="/profile" element={<ProfilePage />} />
+        <Route path="/chat/*" element={<ChatPage />} />
+        <Route path="/*" element={<h1>404</h1>} />
+      </Routes>
+    </BrowserRouter>
   </ThemeProvider>,
   document.getElementById('root')
 );

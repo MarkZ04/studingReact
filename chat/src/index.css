@@ -1,20 +1,20 @@
 body {
   margin: 0 auto;
-  padding: 50px 0;
-  width: 1200px;
+  max-width: 1200px;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
     'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
     sans-serif;
-  background-color: rgb(8, 104, 104);
+  background-color: #17212b;
+}
+
+#root, html {
+  height: 100%;
 }
 
 
-.inputMessage {
-  margin: 20px 0;
-  display: grid;
-  grid-template-columns: 11fr 1fr;
-  align-self: normal;
-}
 
 
 
