@@ -1,39 +1,39 @@
 import React from "react";
-import { useState, useEffect, useRef, useCallback } from "react";
+import { useState, useEffect, useRef, useCallback, useMemo } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { Input, Button } from '@mui/material';
 import { useParams } from "react-router-dom";
 import styles from "./messageList.module.css";
 import { Message } from "./message";
+import { sendMessage, messageSelector } from "../../store/messages";
 
 export const MessageList = () => {
 
-  const [messageList, setMessageList] = useState({});
   const [value, setValue] = useState('');
   const ref = useRef(null);
   const { chatId } = useParams();
+  const dispatch = useDispatch();
 
+  const messageSelectorByMemo = useMemo(
+    () => messageSelector(chatId),
+    [chatId]
+  );
+  const messages = useSelector(messageSelectorByMemo);
 
-  const sendMessage = useCallback(
-    (text, author = "User") => {
-      if (text) {
-        setMessageList({
-          ...messageList,
-          [chatId]: [
-            ...(messageList[chatId] ?? []),
-            { author, text },
-          ],
-        });
-        console.log(messageList)
+  const send = useCallback(
+    (message, author = "User") => {
+      if (message) {
+        dispatch(sendMessage({ author, message }, chatId));
         setValue("");
       }
     },
-    [messageList, chatId]
+    [dispatch, chatId]
   );
 
   const handlePressInput = ({ code }) => {
 
     if (code === "Enter") {
-      sendMessage(value);
+      send(value);
     }
   };
 
@@ -45,21 +45,19 @@ export const MessageList = () => {
 
   useEffect(() => {
     handleScrollBottom();
-  }, [messageList, handleScrollBottom]);
+  }, [messages, handleScrollBottom]);
 
   useEffect(() => {
 
-    const messages = messageList[chatId] ?? [];
     const lastMessage = messages[messages.length - 1];
 
     if (messages.length && lastMessage.author === 'User') {
       setTimeout(() => {
-        sendMessage("I'm bot", "Bot");
+        send("I'm bot", "Bot");
       }, 1000);
     }
-  }, [messageList, setMessageList, chatId])
+  }, [messages, send, chatId])
 
-  const messages = messageList[chatId] ?? [];
 
   return (
     <div className={styles.messageList} >
@@ -77,7 +75,7 @@ export const MessageList = () => {
           onKeyPress={handlePressInput}
           placeholder="You message..." />
 
-        <Button onClick={() => sendMessage(value)}>Send</Button>
+        <Button onClick={() => send(value)}>Send</Button>
       </div>
     </div>
   );

@@ -1,22 +1,22 @@
-import { useState } from "react";
+import { useSelector } from "react-redux";
 import { List } from "@mui/material";
 import { Link, useParams } from "react-router-dom";
 import styles from "./chatList.module.css";
 import { Chat } from "./chat";
+import { conversationsSelector } from "../../store/conversations";
 
 export const ChatList = () => {
 
-  const [chatList] = useState(['chat1', 'chat2', 'chat3']);
   const params = useParams();
-
+  const conversation = useSelector(conversationsSelector);
 
   return (
     <List className={styles.chatList} component="nav">
-      {chatList.map((chat, index) => (
-        <Link key={index} to={`/chat/${chat}`}>
+      {conversation.map((chat, index) => (
+        <Link key={index} to={`/chat/${chat.title}`}>
           <Chat
-            title={chat}
-            selected={params.chatId === chat}
+            title={chat.title}
+            selected={params.chatId === chat.title}
           />
         </Link>
       ))}
