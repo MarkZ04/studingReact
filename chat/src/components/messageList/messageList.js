@@ -5,7 +5,7 @@ import { Input, Button } from '@mui/material';
 import { useParams } from "react-router-dom";
 import styles from "./messageList.module.css";
 import { Message } from "./message";
-import { sendMessage, messageSelector } from "../../store/messages";
+import { sendMessage, messageSelector, sendMessageWithBot } from "../../store/messages";
 
 export const MessageList = () => {
 
@@ -23,7 +23,7 @@ export const MessageList = () => {
   const send = useCallback(
     (message, author = "User") => {
       if (message) {
-        dispatch(sendMessage({ author, message }, chatId));
+        dispatch(sendMessageWithBot({ author, message }, chatId));
         setValue("");
       }
     },
@@ -46,17 +46,6 @@ export const MessageList = () => {
   useEffect(() => {
     handleScrollBottom();
   }, [messages, handleScrollBottom]);
-
-  useEffect(() => {
-
-    const lastMessage = messages[messages.length - 1];
-
-    if (messages.length && lastMessage.author === 'User') {
-      setTimeout(() => {
-        send("I'm bot", "Bot");
-      }, 1000);
-    }
-  }, [messages, send, chatId])
 
 
   return (

@@ -1,5 +1,18 @@
-// import { SEND_MESSAGE } from "./types";
+import { DELETE_CONVERSATION } from "../types";
+import { CREATE_CONVERSATION } from "./types";
 
-// export const sendMessage = (message, chatId) => {
-//   return { type: SEND_MESSAGE, payload: { message, chatId } }
-// }
+export const deleteConversation = (chatId) => {
+
+  return {
+    type: DELETE_CONVERSATION,
+    payload: chatId
+  }
+}
+
+export const createConversation = (chatId) => {
+
+  return {
+    type: CREATE_CONVERSATION,
+    payload: chatId
+  }
+}

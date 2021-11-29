@@ -1,11 +1,31 @@
-import { createStore, combineReducers } from "redux";
+import { createStore, combineReducers, applyMiddleware, compose } from "redux";
+import thunk from "redux-thunk";
+import { persistStore, persistReducer } from "redux-persist";
+import storage from "redux-persist/lib/storage";
 import { profileReducer } from "./profile";
 import { messagesReducer } from "./messages";
 import { conversationsReducer } from "./conversations";
+import { botSendMessage } from "./middlewares";
+
+const persistConfig = {
+  key: "root",
+  storage,
+  whitelist: ["profile"]
+};
 
 export const reducer = combineReducers({
   profile: profileReducer,
   messages: messagesReducer,
   conversations: conversationsReducer
-})
-export const store = createStore(reducer);
+});
+
+const persistreducer = persistReducer(persistConfig, reducer);
+
+export const store = createStore(
+  persistreducer,
+  compose(
+    applyMiddleware(botSendMessage, thunk)
+  )
+);
+
+export const persistor = persistStore(store);

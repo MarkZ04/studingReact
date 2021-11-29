@@ -1,4 +1,5 @@
-// import { SEND_MESSAGE } from "./types";
+import { DELETE_CONVERSATION } from "../types";
+import { CREATE_CONVERSATION } from "./types";
 
 const initialState = {
   conversations: [
@@ -16,12 +17,19 @@ const initialState = {
 export const conversationsReducer = (state = initialState, action) => {
   switch (action.type) {
 
-    // case SEND_MESSAGE:
-    //   return {
-    //   }
+    case DELETE_CONVERSATION:
+      return {
+        ...state,
+        conversations: state.conversations.filter((chat) => chat.title !== action.payload)
+      }
 
-    default: {
+    case CREATE_CONVERSATION:
+      return {
+        ...state, conversations:
+          [...state.conversations, { title: action.payload, value: '' }]
+      }
+
+    default:
       return state;
-    }
   }
 }

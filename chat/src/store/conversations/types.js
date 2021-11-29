@@ -1,1 +1,1 @@
-// export const SEND_MESSAGE = '@messages/actions';
+export const CREATE_CONVERSATION = "@conversation/ create conversation";
