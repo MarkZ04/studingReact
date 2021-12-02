@@ -1,8 +1,6 @@
 import { ProfileForm } from "../components";
 import { useSelector } from "react-redux";
 
-
-
 export const ProfilePage = () => {
 
   const { firstName, ...profile } = useSelector((state) => {

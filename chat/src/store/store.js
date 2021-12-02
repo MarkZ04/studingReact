@@ -5,7 +5,9 @@ import storage from "redux-persist/lib/storage";
 import { profileReducer } from "./profile";
 import { messagesReducer } from "./messages";
 import { conversationsReducer } from "./conversations";
+import { gistsReducer } from "./gists";
 import { botSendMessage } from "./middlewares";
+import { getGistsApi, searchGistsByUserNameApi } from "../api/gists";
 
 const persistConfig = {
   key: "root",
@@ -16,7 +18,8 @@ const persistConfig = {
 export const reducer = combineReducers({
   profile: profileReducer,
   messages: messagesReducer,
-  conversations: conversationsReducer
+  conversations: conversationsReducer,
+  gists: gistsReducer
 });
 
 const persistreducer = persistReducer(persistConfig, reducer);
@@ -24,7 +27,10 @@ const persistreducer = persistReducer(persistConfig, reducer);
 export const store = createStore(
   persistreducer,
   compose(
-    applyMiddleware(botSendMessage, thunk)
+    applyMiddleware(
+      botSendMessage,
+      thunk.withExtraArgument({ getGistsApi, searchGistsByUserNameApi })
+    )
   )
 );
 
