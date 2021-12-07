@@ -8,6 +8,8 @@ import { conversationsReducer } from "./conversations";
 import { gistsReducer } from "./gists";
 import { botSendMessage } from "./middlewares";
 import { getGistsApi, searchGistsByUserNameApi } from "../api/gists";
+import { getMessagesApi, sendMessageApi } from "../api/messages";
+import { getConversationsApi, updateConversationsApi } from "../api/conversations";
 
 const persistConfig = {
   key: "root",
@@ -29,7 +31,14 @@ export const store = createStore(
   compose(
     applyMiddleware(
       botSendMessage,
-      thunk.withExtraArgument({ getGistsApi, searchGistsByUserNameApi })
+      thunk.withExtraArgument({
+        getGistsApi,
+        searchGistsByUserNameApi,
+        getMessagesApi,
+        sendMessageApi,
+        getConversationsApi,
+        updateConversationsApi
+      })
     )
   )
 );
