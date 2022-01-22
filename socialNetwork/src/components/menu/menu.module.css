@@ -1,0 +1,6 @@
+.menu {
+  grid-area: menu;
+  display: flex;
+  flex-direction: column;
+  background-color: darkmagenta;
+}
