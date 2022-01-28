@@ -1,6 +1,21 @@
 .menu {
+  padding: 20px;
   grid-area: menu;
   display: flex;
   flex-direction: column;
   background-color: darkmagenta;
+}
+
+.link {
+  color: white;
+  text-decoration: none;
+}
+
+.link_active {
+  color: aquamarine;
+  text-decoration: none;
+}
+
+.link:active {
+  color: blue;
 }

@@ -1,15 +1,28 @@
-import React from 'react';
-import style from './menu.module.css';
-
+import React from "react";
+import { NavLink } from "react-router-dom";
+import style from "./menu.module.css";
 
 export const Menu = () => {
   return (
     <nav className={style.menu}>
-      <a href="#">Profile</a>
-      <a href="#">News</a>
-      <a href="#">Messages</a>
-      <a href="#">Music</a>
-      <a href="#">Settings</a>
+      <NavLink
+        className={el => el.isActive ? style.link_active : style.link}
+        to="/profile"
+      >
+        Profile
+      </NavLink>
+      <NavLink className={el => el.isActive ? style.link_active : style.link} to="/messages">
+        Messages
+      </NavLink>
+      <NavLink className={el => el.isActive ? style.link_active : style.link} to="/news">
+        News
+      </NavLink>
+      <NavLink className={el => el.isActive ? style.link_active : style.link} to="/music">
+        Music
+      </NavLink>
+      <NavLink className={el => el.isActive ? style.link_active : style.link} to="/settings">
+        Settings
+      </NavLink>
     </nav>
-  )
-}
+  );
+};
