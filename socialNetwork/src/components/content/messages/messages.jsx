@@ -3,11 +3,11 @@ import style from './messages.module.css';
 import { Dialogs } from './dialogs';
 import { Conversation } from './conversation';
 
-export const Messages = () => {
+export const Messages = (props) => {
   return (
     <div className={style.messages}>
-      <Dialogs />
-      <Conversation/>
+      <Dialogs dialogsData={props.state.dialogsData} />
+      <Conversation messagesData={props.state.messagesData} />
     </div>
   )
 }

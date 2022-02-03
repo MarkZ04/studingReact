@@ -7,17 +7,17 @@ import { News } from './news';
 import { Music } from './music';
 import { Settings } from './settings';
 
-export const Content = () => {
+export const Content = (props) => {
   return (
     <div className={style.content}>
       <Routes>
-          <Route
-            path="/profile"
-            element={<Profile />}
-          />
-          <Route
-            path="/messages"
-            element={<Messages />}
+        <Route
+          path="/profile"
+          element={<Profile state={props.state.profilePage} />}
+        />
+        <Route
+          path="/messages"
+          element={<Messages state={props.state.messagesPage} />}
         />
         <Route
           path="/news"

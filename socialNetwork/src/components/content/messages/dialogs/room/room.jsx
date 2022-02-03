@@ -1,9 +1,10 @@
 import React from "react";
+import { NavLink } from "react-router-dom";
 
-export const Room = () => {
+export const Room = (props) => {
   return (
-    <div>
-      Room 1
-    </div>
+    <a href="#">
+      {props.name}
+    </a>
   )
 }

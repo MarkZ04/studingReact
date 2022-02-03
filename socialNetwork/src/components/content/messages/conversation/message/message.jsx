@@ -1,9 +1,9 @@
 import React from "react";
 
-export const Message = () => {
+export const Message = (props) => {
   return (
     <div>
-      Message
+      {props.message}
     </div>
   )
 }

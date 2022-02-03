@@ -5,6 +5,7 @@ import "./index.css";
 import { Header } from "./components/header";
 import { Menu } from "./components/menu";
 import { Content } from "./components/content";
+import { state } from "./redux/state";
 
 ReactDOM.render(
   <React.StrictMode>
@@ -12,7 +13,7 @@ ReactDOM.render(
       <>
         <Header />
         <Menu />
-        <Content />
+        <Content state={state} />
       </>
     </BrowserRouter>
   </React.StrictMode >,
