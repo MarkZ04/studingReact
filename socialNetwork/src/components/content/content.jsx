@@ -13,7 +13,7 @@ export const Content = (props) => {
       <Routes>
         <Route
           path="/profile"
-          element={<Profile state={props.state.profilePage} />}
+          element={<Profile profilePage={props.state.profilePage} addNewPost={props.state.addNewPost} newPostText={props.state.newPostText} />}
         />
         <Route
           path="/messages"

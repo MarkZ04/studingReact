@@ -2,17 +2,14 @@ import React from "react";
 import style from './conversation.module.css'
 import { Message } from "./message";
 
-// const messagesData = [
-//   { id: 1, message: 'Hello!' },
-//   { id: 2, message: 'Hi!' },
-//   { id: 3, message: 'sdfjsd!' },
-//   { id: 4, message: 'lblklblklhaslk' },
-// ];
-
-
 export const Conversation = (props) => {
 
-  const messagesElements = props.messagesData.map(el => <Message message={ el.message}/>);
+  const messagesElements = props.messagesData.map(el => <Message message={el.message} />);
+  const newMessage = React.createRef();
+
+  const sendMessage = () => {
+    console.log(newMessage.current.value);
+  }
 
   return (
     <div>
@@ -20,8 +17,8 @@ export const Conversation = (props) => {
         {messagesElements}
       </div>
       <div>
-        <input type="text" />
-        <button>Send</button>
+        <input ref={newMessage} type="text" />
+        <button onClick={sendMessage}>Send</button>
       </div>
     </div>
   )
