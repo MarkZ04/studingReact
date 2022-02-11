@@ -1,4 +1,6 @@
-import { rerender } from "../render";
+let rerender = () => {
+  console.log('func plug');
+}
 
 export const state = {
   profilePage: {
@@ -24,18 +26,20 @@ export const state = {
       { id: 4, message: 'lblklblklhaslk' },
     ]
   },
-
-  addNewPost(postMessage) {
-    state.profilePage.postsData.push({ id: 3, post: postMessage });
-    state.profilePage.newPostValue = '';
-    rerender(state);
-  },
-
-  newPostText(currentValue) {
-    state.profilePage.newPostValue = currentValue;
-    rerender(state);
-  }
 }
 
+export const addNewPost = (postMessage) => {
+  state.profilePage.postsData.push({ id: 3, post: postMessage });
+  state.profilePage.newPostValue = '';
+  rerender(state);
+};
 
+export const newPostText = (currentValue) => {
+  state.profilePage.newPostValue = currentValue;
+  rerender(state);
+};
+
+export const subscribe = (observer) => {
+  rerender = observer;  // observer = cb function
+};
 
