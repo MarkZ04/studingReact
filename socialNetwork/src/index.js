@@ -1,5 +1,5 @@
 import "./index.css";
-import { addNewPost, newPostText, state, subscribe } from "./redux/state";
+import { store } from "./redux/state";
 import React from "react";
 import ReactDOM from "react-dom";
 import { BrowserRouter } from "react-router-dom";
@@ -16,8 +16,7 @@ const rerender = (state) => {
           <Menu />
           <Content
             state={state}
-            addNewPost={addNewPost}
-            newPostText={newPostText}
+            dispatch={store.dispatch.bind(store)}
           />
         </>
       </BrowserRouter>
@@ -25,5 +24,5 @@ const rerender = (state) => {
     document.getElementById("root")
   );
 }
-rerender(state);
-subscribe(rerender);
+rerender(store.getState());
+store.subscribe(rerender);

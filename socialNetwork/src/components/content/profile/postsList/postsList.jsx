@@ -8,11 +8,11 @@ export const PostsList = (props) => {
   let newPost = React.createRef();
 
   let addNewPost = () => {
-    props.addNewPost(newPost.current.value);
+    props.dispatch({type: 'ADD-NEW-POST', postMessage: newPost.current.value });
   };
 
   let newPostUpdate = () => {
-    props.newPostText(newPost.current.value)
+    props.dispatch({type: 'NEW-POST-TEXT', currentValue: newPost.current.value })
   }
 
   return (

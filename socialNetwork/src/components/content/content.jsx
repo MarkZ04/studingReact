@@ -15,8 +15,7 @@ export const Content = (props) => {
           path="/profile"
           element={<Profile
             profilePage={props.state.profilePage}
-            addNewPost={props.addNewPost}
-            newPostText={props.newPostText}
+            dispatch={props.dispatch}
           />}
         />
         <Route
