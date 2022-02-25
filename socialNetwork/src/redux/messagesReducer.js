@@ -1,7 +1,22 @@
 const ADD_NEW_MESSAGE = 'ADD-NEW-MESSAGE';
 const NEW_MESSAGE_TEXT = 'NEW-MESSAGE-TEXT';
 
-export const messagesReducer = (action, state) => {
+const initialState = {
+  dialogsData: [
+    { id: 1, name: 'Anna' },
+    { id: 2, name: 'Mark' },
+    { id: 3, name: 'John' },
+  ],
+
+  messagesData: [
+    { id: 1, message: 'Hello!' },
+    { id: 2, message: 'Hi!' },
+    { id: 3, message: 'sdfjsd!' },
+  ],
+  newMessageValue: '',
+}
+
+export const messagesReducer = (state = initialState, action) => {
   switch (action.type) {
     case 'ADD-NEW-MESSAGE':
       state.messagesData.push({ id: 3, message: action.messageText });

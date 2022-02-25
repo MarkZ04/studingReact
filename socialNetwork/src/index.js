@@ -1,5 +1,5 @@
 import "./index.css";
-import { store } from "./redux/state";
+import { store } from "./redux/storeRedux";
 import React from "react";
 import ReactDOM from "react-dom";
 import { BrowserRouter } from "react-router-dom";
@@ -24,5 +24,9 @@ const rerender = (state) => {
     document.getElementById("root")
   );
 }
+
 rerender(store.getState());
-store.subscribe(rerender);
+store.subscribe(() => {
+  const state = store.getState();
+  rerender(state);
+});

@@ -34,7 +34,7 @@ export let store = {
     return this._state;
   },
   subscribe(observer) {
-    this._rerender = observer;  // observer = rerender() from index.js
+    this._rerender = observer;  // observer = rerender(state) from index.js
   },
 
   dispatch(action) {
