@@ -7,7 +7,10 @@ export const Messages = (props) => {
   return (
     <div className={style.messages}>
       <Dialogs dialogsData={props.state.dialogsData} />
-      <Conversation messagesData={props.state.messagesData} />
+      <Conversation
+        state={props.state}
+        dispatch={props.dispatch}
+      />
     </div>
   )
 }

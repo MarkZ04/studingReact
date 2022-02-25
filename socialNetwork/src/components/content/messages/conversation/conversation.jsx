@@ -1,14 +1,18 @@
 import React from "react";
-import style from './conversation.module.css'
+import { addNewMessageActionCreator, newMessageTextActionCreator } from "../../../../redux/messagesReducer";
+import style from './conversation.module.css';
 import { Message } from "./message";
 
 export const Conversation = (props) => {
-
-  const messagesElements = props.messagesData.map(el => <Message message={el.message} />);
+  const messagesElements = props.state.messagesData.map(el => <Message message={el.message} />);
   const newMessage = React.createRef();
 
+  const changeMessageText = () => {
+    props.dispatch(newMessageTextActionCreator(newMessage.current.value));
+  }
+
   const sendMessage = () => {
-    console.log(newMessage.current.value);
+    props.dispatch(addNewMessageActionCreator(newMessage.current.value));
   }
 
   return (
@@ -17,7 +21,7 @@ export const Conversation = (props) => {
         {messagesElements}
       </div>
       <div>
-        <input ref={newMessage} type="text" />
+        <input ref={newMessage} onChange={changeMessageText} value={props.state.newMessageValue} type="text" />
         <button onClick={sendMessage}>Send</button>
       </div>
     </div>

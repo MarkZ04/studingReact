@@ -1,3 +1,6 @@
+import { messagesReducer } from "./messagesReducer";
+import { profileReducer } from "./profileReducer";
+
 export let store = {
 
   _state: {
@@ -21,8 +24,8 @@ export let store = {
         { id: 1, message: 'Hello!' },
         { id: 2, message: 'Hi!' },
         { id: 3, message: 'sdfjsd!' },
-        { id: 4, message: 'lblklblklhaslk' },
-      ]
+      ],
+      newMessageValue: '',
     },
   },
   _rerender() { }, // = rerender from index.js
@@ -35,21 +38,16 @@ export let store = {
   },
 
   dispatch(action) {
+    const state = this.getState();
 
-    if (action.type === 'ADD-NEW-POST') {
-      const state = this.getState();
-      state.profilePage.postsData.push({ id: 3, post: action.postMessage });
-      state.profilePage.newPostValue = '';
-      this._rerender(this.getState());
-    }
+    state.profilePage = profileReducer(action, state.profilePage);
+    state.messagesPage = messagesReducer(action, state.messagesPage);
 
-    if (action.type === 'NEW-POST-TEXT') {
-      const state = this.getState();
-      state.profilePage.newPostValue = action.currentValue;
-      this._rerender(this.getState());
-    }
+    this._rerender(state);
   }
 }
+
+
 
 
 
