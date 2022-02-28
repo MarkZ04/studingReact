@@ -1,15 +1,16 @@
 import React from 'react';
 import style from './messages.module.css';
-import { Dialogs } from './dialogs';
-import { Conversation } from './conversation';
+import { ConversationContainer } from './conversation/conversationContainer';
+import { DialogsContainer } from './dialogs/dialogsContainer';
 
 export const Messages = (props) => {
   return (
     <div className={style.messages}>
-      <Dialogs dialogsData={props.state.dialogsData} />
-      <Conversation
-        state={props.state}
-        dispatch={props.dispatch}
+      <DialogsContainer
+        store={props.store}
+      />
+      <ConversationContainer
+        store={props.store}
       />
     </div>
   )

@@ -1,19 +1,16 @@
 import React from 'react';
-import { addNewPostActionCreator, newPostTextActionCreator } from '../../../../redux/profileReducer';
-import { Post } from './post/post';
 import style from './postsList.module.css';
 
 export const PostsList = (props) => {
 
-  const postsElements = props.profilePage.postsData.map(el => <Post post={el.post} />);
   let newPost = React.createRef();
 
   let addNewPost = () => {
-    props.dispatch(addNewPostActionCreator(newPost.current.value));
+    props.addNewPost(newPost.current.value);
   };
 
   let newPostUpdate = () => {
-    props.dispatch(newPostTextActionCreator(newPost.current.value))
+    props.newPostUpdate(newPost.current.value);
   };
 
   return (
@@ -23,12 +20,12 @@ export const PostsList = (props) => {
         <textarea
           ref={newPost}
           onChange={newPostUpdate}
-          value={props.profilePage.newPostValue}
+          value={props.newPostValue}
           placeholder='New Post'
         />
         <button onClick={addNewPost}>Add post</button>
       </div>
-      {postsElements}
+      {props.postsElements}
     </div>
   )
 }

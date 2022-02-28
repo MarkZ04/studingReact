@@ -14,15 +14,13 @@ export const Content = (props) => {
         <Route
           path="/profile"
           element={<Profile
-            profilePage={props.state.profilePage}
-            dispatch={props.dispatch}
+            store={props.store}
           />}
         />
         <Route
           path="/messages"
           element={<Messages
-            state={props.state.messagesPage}
-            dispatch={props.dispatch}
+            store={props.store}
           />}
         />
         <Route

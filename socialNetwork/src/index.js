@@ -15,8 +15,7 @@ const rerender = (state) => {
           <Header />
           <Menu />
           <Content
-            state={state}
-            dispatch={store.dispatch.bind(store)}
+            store={store}
           />
         </>
       </BrowserRouter>
