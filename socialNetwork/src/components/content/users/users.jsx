@@ -1,35 +1,16 @@
 import React from "react";
-import style from "./users.module.css"
+import style from "./users.module.css";
+import * as axios from 'axios';
 
 export const Users = (props) => {
-  // if (props.users.length === 0) {
-  //   props.setUsers([
-  //     {
-  //       id: 1,
-  //       firstName: 'Anna',
-  //       lastName: 'Sap',
-  //       status: 'Hello!',
-  //       photoUrl: 'URL',
-  //       follow: true,
-  //       location: {
-  //         country: 'Russia',
-  //         city: 'Saint-Petersburg'
-  //       }
-  //     },
-  //     {
-  //       id: 2,
-  //       firstName: 'Alex',
-  //       lastName: 'Sam',
-  //       status: 'Hi!',
-  //       photoUrl: 'URL',
-  //       follow: false,
-  //       location: {
-  //         country: 'Belarus',
-  //         city: 'Minsk'
-  //       }
-  //     }
-  //   ])
-  // }
+  
+  if (props.users.length === 0) {
+
+    axios.get('https://social-network.samuraijs.com/api/1.0/users')
+      .then(response => {
+        props.setUsers(response.data.items);
+      })
+  }
 
   return (
     <div>
@@ -45,8 +26,8 @@ export const Users = (props) => {
               </div>
               <div className={style.content_wrap}>
                 <div className={style.content}>
-                  <div className={style.name}>{u.firstName }</div>
-                  <div>{ u.location.city}</div>
+                  <div className={style.name}>{u.name }</div>
+                  <div>{ 'u.location.city'}</div>
                 </div>
                 <span>{u.status}</span>
               </div>

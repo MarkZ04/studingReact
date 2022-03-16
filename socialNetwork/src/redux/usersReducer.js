@@ -1,6 +1,6 @@
 const USER_FOLLOW = 'USER_FOLLOW';
-const USER_NOFOLLOW = 'USER_NOFOLLOW'
-const SET_USERS = 'SET_USERS'
+const USER_NOFOLLOW = 'USER_NOFOLLOW';
+const SET_USERS = 'SET_USERS';
 
 const initialState = {
   users: []
@@ -38,7 +38,7 @@ export const usersReducer = (state = initialState, action) => {
     case SET_USERS:
       return {
         ...state,
-        users: state.users.concat(action.users)
+        users: [...state.users, ...action.users] // ??????????????
       }
 
     default:
