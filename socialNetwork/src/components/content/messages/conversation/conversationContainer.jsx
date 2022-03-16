@@ -1,27 +1,24 @@
 import React from "react";
+import { connect } from "react-redux";
 import { addNewMessageActionCreator, newMessageTextActionCreator } from "../../../../redux/messagesReducer";
 import { Conversation } from "./conversation";
-import { Message } from "./message";
 
-export const ConversationContainer = (props) => {
-  
-  const state = props.store.getState();
-  const messagesElements = state.messagesPage.messagesData.map(el => <Message message={el.message} />);
-
-  const changeMessageText = (text) => {
-    props.store.dispatch(newMessageTextActionCreator(text));
+const mapStateToProps = (state) => {
+  return {
+    messagesData: state.messagesPage.messagesData,
+    newMessageValue: state.messagesPage.newMessageValue
   }
-
-  const sendMessage = (text) => {
-    props.store.dispatch(addNewMessageActionCreator(text));
-  }
-
-  return (
-    <Conversation
-      messagesElements={messagesElements}
-      changeMessageText={changeMessageText}
-      sendMessage={sendMessage}
-      newMessageValue={state.messagesPage.newMessageValue}
-    />
-  )
 }
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    changeMessageText: (text) => {
+      dispatch(newMessageTextActionCreator(text));
+    },
+    sendMessage: (text) => {
+      dispatch(addNewMessageActionCreator(text));
+    }
+  }
+}
+
+export const ConversationContainer = connect(mapStateToProps, mapDispatchToProps)(Conversation);

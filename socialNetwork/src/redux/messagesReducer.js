@@ -1,5 +1,5 @@
-const ADD_NEW_MESSAGE = 'ADD-NEW-MESSAGE';
-const NEW_MESSAGE_TEXT = 'NEW-MESSAGE-TEXT';
+const ADD_NEW_MESSAGE = 'ADD_NEW_MESSAGE';
+const NEW_MESSAGE_TEXT = 'NEW_MESSAGE_TEXT';
 
 const initialState = {
   dialogsData: [
@@ -11,21 +11,25 @@ const initialState = {
   messagesData: [
     { id: 1, message: 'Hello!' },
     { id: 2, message: 'Hi!' },
-    { id: 3, message: 'sdfjsd!' },
   ],
   newMessageValue: '',
 }
 
 export const messagesReducer = (state = initialState, action) => {
   switch (action.type) {
-    case 'ADD-NEW-MESSAGE':
-      state.messagesData.push({ id: 3, message: action.messageText });
-      state.newMessageValue = '';
-      return state;
 
-    case 'NEW-MESSAGE-TEXT':
-      state.newMessageValue = action.text;
-      return state;
+    case 'ADD_NEW_MESSAGE':
+      return {
+        ...state,
+        messagesData: [...state.messagesData, { id: 3, message: action.messageText }],
+        newMessageValue: ''
+      };
+
+    case 'NEW_MESSAGE_TEXT':
+      return {
+        ...state,
+        newMessageValue: action.text
+      };
 
     default:
       return state;

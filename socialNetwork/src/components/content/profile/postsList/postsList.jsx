@@ -1,7 +1,10 @@
 import React from 'react';
 import style from './postsList.module.css';
+import { Post } from './post/post';
 
 export const PostsList = (props) => {
+
+  const postsElements = props.postsData.map(el => <Post post={el.post} />);
 
   let newPost = React.createRef();
 
@@ -25,7 +28,7 @@ export const PostsList = (props) => {
         />
         <button onClick={addNewPost}>Add post</button>
       </div>
-      {props.postsElements}
+      {postsElements}
     </div>
   )
 }

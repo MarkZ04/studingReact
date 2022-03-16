@@ -6,26 +6,21 @@ import { BrowserRouter } from "react-router-dom";
 import { Header } from "./components/header";
 import { Menu } from "./components/menu";
 import { Content } from "./components/content";
+import { Provider } from "react-redux";
 
-const rerender = (state) => {
-  ReactDOM.render(
-    <React.StrictMode>
-      <BrowserRouter>
+ReactDOM.render(
+  <React.StrictMode>
+    <BrowserRouter>
+      <Provider store={store}>
         <>
           <Header />
           <Menu />
-          <Content
-            store={store}
-          />
+          <Content />
         </>
-      </BrowserRouter>
-    </React.StrictMode >,
-    document.getElementById("root")
-  );
-}
+      </Provider>
+    </BrowserRouter>
+  </React.StrictMode >,
+  document.getElementById("root")
+);
 
-rerender(store.getState());
-store.subscribe(() => {
-  const state = store.getState();
-  rerender(state);
-});
+

@@ -11,7 +11,7 @@ export const Post = (props) => {
     <div className={style.wrapper}>
       <img className={style.ava} src='https://hornews.com/upload/images/blank-avatar.jpg'></img>
       <div>
-        {props.post }
+        {props.post}
       </div>
       <button onClick={handler}>Like</button>
       <div>{like}</div>

@@ -1,5 +1,5 @@
-const ADD_NEW_POST = 'ADD-NEW-POST';
-const NEW_POST_TEXT = 'NEW-POST-TEXT';
+const ADD_NEW_POST = 'ADD_NEW_POST';
+const NEW_POST_TEXT = 'NEW_POST_TEXT';
 
 const initialState = {
   postsData: [
@@ -11,14 +11,19 @@ const initialState = {
 
 export const profileReducer = (state = initialState, action) => {
   switch (action.type) {
-    case 'ADD-NEW-POST':
-      state.postsData.push({ id: 3, post: action.postMessage });
-      state.newPostValue = '';
-      return state;
 
-    case 'NEW-POST-TEXT':
-      state.newPostValue = action.currentValue;
-      return state;
+    case 'ADD_NEW_POST':
+      return {
+        ...state,
+        postsData: [...state.postsData, { id: 3, post: action.postMessage }],
+        newPostValue: ''
+      };
+
+    case 'NEW_POST_TEXT':
+      return {
+        ...state,
+        newPostValue: action.currentValue
+      };
 
     default:
       return state;

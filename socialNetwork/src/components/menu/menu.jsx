@@ -14,6 +14,9 @@ export const Menu = () => {
       <NavLink className={el => el.isActive ? style.link_active : style.link} to="/messages">
         Messages
       </NavLink>
+      <NavLink className={el => el.isActive ? style.link_active : style.link} to="/users">
+        Users
+      </NavLink>
       <NavLink className={el => el.isActive ? style.link_active : style.link} to="/news">
         News
       </NavLink>

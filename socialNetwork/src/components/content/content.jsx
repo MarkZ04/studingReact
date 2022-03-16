@@ -6,6 +6,7 @@ import { Messages } from './messages';
 import { News } from './news';
 import { Music } from './music';
 import { Settings } from './settings';
+import { UsersContainer } from './users/usersContainer';
 
 export const Content = (props) => {
   return (
@@ -13,15 +14,15 @@ export const Content = (props) => {
       <Routes>
         <Route
           path="/profile"
-          element={<Profile
-            store={props.store}
-          />}
+          element={<Profile />}
         />
         <Route
           path="/messages"
-          element={<Messages
-            store={props.store}
-          />}
+          element={<Messages />}
+        />
+        <Route
+          path="/users"
+          element={<UsersContainer />}
         />
         <Route
           path="/news"
