@@ -9,7 +9,7 @@ export const Post = (props) => {
   }
   return (
     <div className={style.wrapper}>
-      <img className={style.ava} src='https://hornews.com/upload/images/blank-avatar.jpg'></img>
+      <img className={style.ava} src='https://hornews.com/upload/images/blank-avatar.jpg' alt='img'></img>
       <div>
         {props.post}
       </div>
