@@ -6,7 +6,7 @@ import { Messages } from './messages';
 import { News } from './news';
 import { Music } from './music';
 import { Settings } from './settings';
-import { UsersContainer } from './users/usersContainer';
+import UsersContainer from './users/usersContainer';
 
 export const Content = (props) => {
   return (
