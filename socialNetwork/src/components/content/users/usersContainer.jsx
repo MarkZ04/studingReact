@@ -2,9 +2,9 @@ import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 import * as axios from 'axios';
 import {
-  followActionCreator,
-  nofollowActionCreator,
-  setUsersActionCreator,
+  followAC,
+  nofollowAC,
+  setUsersAC,
   setUsersTotalCountAC,
   setCurrentUsersPageAC,
   toggleIsFetchingAC,
@@ -14,15 +14,15 @@ import { Preloader } from '../../common/preloader/preloader';
 
 const UsersContainer = (props) => {
   useEffect(() => {
-    props.toggleIsFetching(true);
+    props.toggleIsFetchingAC(true);
     axios
       .get(
         `https://social-network.samuraijs.com/api/1.0/users?page=${props.currentUsersPage}&count=${props.usersCount}`
       )
       .then((response) => {
-        props.toggleIsFetching(false);
-        props.setUsers(response.data.items);
-        props.setUsersTotalCount(response.data.totalCount);
+        props.toggleIsFetchingAC(false);
+        props.setUsersAC(response.data.items);
+        props.setUsersTotalCountAC(response.data.totalCount);
       });
   }, [props.currentUsersPage, props.usersCount]);
 
@@ -34,7 +34,7 @@ const UsersContainer = (props) => {
         <Users
           totalCount={props.totalCount}
           usersCount={props.usersCount}
-          setCurrentUsersPage={props.setCurrentUsersPage}
+          setCurrentUsersPageAC={props.setCurrentUsersPageAC}
           nofollow={props.nofollow}
           follow={props.follow}
           users={props.users}
@@ -55,27 +55,34 @@ let mapStateToProps = (state) => {
   };
 };
 
-let mapDispatchToProps = (dispatch) => {
-  return {
-    follow: (userId) => {
-      dispatch(followActionCreator(userId));
-    },
-    nofollow: (userId) => {
-      dispatch(nofollowActionCreator(userId));
-    },
-    setUsers: (users) => {
-      dispatch(setUsersActionCreator(users));
-    },
-    setUsersTotalCount: (totalCount) => {
-      dispatch(setUsersTotalCountAC(totalCount));
-    },
-    setCurrentUsersPage: (currentUsersPage) => {
-      dispatch(setCurrentUsersPageAC(currentUsersPage));
-    },
-    toggleIsFetching: (isFetching) => {
-      dispatch(toggleIsFetchingAC(isFetching));
-    },
-  };
-};
+export default connect(mapStateToProps, {
+  followAC,
+  nofollowAC,
+  setUsersAC,
+  setUsersTotalCountAC,
+  setCurrentUsersPageAC,
+  toggleIsFetchingAC,
+})(UsersContainer);
 
-export default connect(mapStateToProps, mapDispatchToProps)(UsersContainer);
+// let mapDispatchToProps = (dispatch) => {
+//   return {
+//     follow: (userId) => {
+//       dispatch(followActionCreator(userId));
+//     },
+//     nofollow: (userId) => {
+//       dispatch(nofollowActionCreator(userId));
+//     },
+//     setUsers: (users) => {
+//       dispatch(setUsersActionCreator(users));
+//     },
+//     setUsersTotalCount: (totalCount) => {
+//       dispatch(setUsersTotalCountAC(totalCount));
+//     },
+//     setCurrentUsersPage: (currentUsersPage) => {
+//       dispatch(setCurrentUsersPageAC(currentUsersPage));
+//     },
+//     toggleIsFetching: (isFetching) => {
+//       dispatch(toggleIsFetchingAC(isFetching));
+//     },
+//   };
+// };

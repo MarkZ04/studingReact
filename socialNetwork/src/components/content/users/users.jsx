@@ -19,7 +19,7 @@ export const Users = (props) => {
             <button
               key={page}
               onClick={(e) => {
-                props.setCurrentUsersPage(page);
+                props.setCurrentUsersPageAC(page);
               }}
             >
               {page}
