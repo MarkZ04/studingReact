@@ -1,4 +1,5 @@
 import React from 'react';
+import { NavLink } from 'react-router-dom';
 import style from './users.module.css';
 
 export const Users = (props) => {
@@ -32,11 +33,13 @@ export const Users = (props) => {
         return (
           <div className={style.user} key={u.id}>
             <div className={style.avatar_wrap}>
-              <img
-                className={style.photo}
-                src={u.photos.small !== null ? u.photos.small : null}
-                alt=""
-              />
+              <NavLink to={`/profile/${u.id}`}>
+                <img
+                  className={style.photo}
+                  src={u.photos.small !== null ? u.photos.small : null}
+                  alt="photo"
+                />
+              </NavLink>
               <button
                 onClick={() => {
                   u.follow ? props.nofollow(u.id) : props.follow(u.id);

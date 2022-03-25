@@ -1,12 +1,11 @@
 import React from 'react';
 
-export const ProfileInfo = () => {
+export const ProfileInfo = (props) => {
   return (
     <div>
-      <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQFC1PJDR0WUeC_LVL1ZFhDcphCVecSwG7q5Q&usqp=CAU" alt='img'></img>
-      <div>
-        Profile info
-      </div>
+      <img src={props.photoLarge} alt="photo"></img>
+      <div>{props.fullName}</div>
+      <div>{props.aboutMe}</div>
     </div>
-  )
-}
+  );
+};

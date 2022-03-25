@@ -3,8 +3,9 @@ import style from './postsList.module.css';
 import { Post } from './post/post';
 
 export const PostsList = (props) => {
-
-  const postsElements = props.postsData.map(el => <Post post={el.post} />);
+  const postsElements = props.postsData.map((el, i) => (
+    <Post key={i} post={el.post} />
+  ));
 
   let newPost = React.createRef();
 
@@ -24,11 +25,11 @@ export const PostsList = (props) => {
           ref={newPost}
           onChange={newPostUpdate}
           value={props.newPostValue}
-          placeholder='New Post'
+          placeholder="New Post"
         />
         <button onClick={addNewPost}>Add post</button>
       </div>
       {postsElements}
     </div>
-  )
-}
+  );
+};

@@ -5,8 +5,12 @@ import { PostsListContainer } from './postsList/postsListContainer';
 export const Profile = (props) => {
   return (
     <div>
-      <ProfileInfo/>
+      <ProfileInfo
+        fullName={props.userProfile.fullName}
+        photoLarge={props.userProfile.photos.large}
+        aboutMe={props.userProfile.aboutMe}
+      />
       <PostsListContainer />
     </div>
-  )
-}
+  );
+};
