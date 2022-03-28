@@ -33,11 +33,11 @@ export const Users = (props) => {
         return (
           <div className={style.user} key={u.id}>
             <div className={style.avatar_wrap}>
-              <NavLink to={`/profile/${u.id}`}>
+              <NavLink className={style.photo} to={`/profile/${u.id}`}>
                 <img
                   className={style.photo}
                   src={u.photos.small !== null ? u.photos.small : null}
-                  alt="photo"
+                  alt=""
                 />
               </NavLink>
               <button
