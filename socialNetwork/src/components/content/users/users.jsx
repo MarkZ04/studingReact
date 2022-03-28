@@ -43,9 +43,12 @@ export const Users = (props) => {
               </NavLink>
               {u.followed ? (
                 <button
+                  disabled={props.followingInProgress.includes(u.id)}
                   onClick={() => {
+                    props.toggleFollowingInProgressAC(u.id, true);
                     followedApi.deleteFollowed(u.id).then((data) => {
                       if (data.resultCode === 0) props.nofollowAC(u.id);
+                      props.toggleFollowingInProgressAC(u.id, false);
                     });
                   }}
                 >
@@ -53,9 +56,12 @@ export const Users = (props) => {
                 </button>
               ) : (
                 <button
+                  disabled={props.followingInProgress.includes(u.id)}
                   onClick={() => {
+                    props.toggleFollowingInProgressAC(u.id, true);
                     followedApi.postFollowed(u.id).then((data) => {
                       if (data.resultCode === 0) props.followAC(u.id);
+                      props.toggleFollowingInProgressAC(u.id, false);
                     });
                   }}
                 >
