@@ -1,6 +1,5 @@
 import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
-import * as axios from 'axios';
 import {
   followAC,
   nofollowAC,
@@ -10,20 +9,17 @@ import {
   toggleIsFetchingAC,
 } from '../../../redux/usersReducer';
 import { Users } from './users';
-import { Preloader } from '../../common/preloader/preloader';
+import { Preloader } from '../../common/preloader';
+import { usersApi } from '../../../api';
 
 const UsersContainer = (props) => {
   useEffect(() => {
     props.toggleIsFetchingAC(true);
-    axios
-      .get(
-        `https://social-network.samuraijs.com/api/1.0/users?page=${props.currentUsersPage}&count=${props.usersCount}`
-      )
-      .then((response) => {
-        props.toggleIsFetchingAC(false);
-        props.setUsersAC(response.data.items);
-        props.setUsersTotalCountAC(response.data.totalCount);
-      });
+    usersApi.getUsers(props.currentUsersPage, props.usersCount).then((data) => {
+      props.toggleIsFetchingAC(false);
+      props.setUsersAC(data.items);
+      props.setUsersTotalCountAC(data.totalCount);
+    });
   }, [props.currentUsersPage, props.usersCount]);
 
   return (
@@ -35,8 +31,8 @@ const UsersContainer = (props) => {
           totalCount={props.totalCount}
           usersCount={props.usersCount}
           setCurrentUsersPageAC={props.setCurrentUsersPageAC}
-          nofollow={props.nofollow}
-          follow={props.follow}
+          nofollowAC={props.nofollowAC}
+          followAC={props.followAC}
           users={props.users}
           isFetching={props.isFetching}
         />

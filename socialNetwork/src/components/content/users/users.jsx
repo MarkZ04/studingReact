@@ -1,5 +1,6 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
+import { followedApi } from '../../../api';
 import style from './users.module.css';
 
 export const Users = (props) => {
@@ -40,13 +41,27 @@ export const Users = (props) => {
                   alt=""
                 />
               </NavLink>
-              <button
-                onClick={() => {
-                  u.follow ? props.nofollow(u.id) : props.follow(u.id);
-                }}
-              >
-                {u.follow ? 'Follow' : 'Nofollow'}
-              </button>
+              {u.followed ? (
+                <button
+                  onClick={() => {
+                    followedApi.deleteFollowed(u.id).then((data) => {
+                      if (data.resultCode === 0) props.nofollowAC(u.id);
+                    });
+                  }}
+                >
+                  Follow
+                </button>
+              ) : (
+                <button
+                  onClick={() => {
+                    followedApi.postFollowed(u.id).then((data) => {
+                      if (data.resultCode === 0) props.followAC(u.id);
+                    });
+                  }}
+                >
+                  Nofollow
+                </button>
+              )}
             </div>
 
             <div className={style.content_wrap}>
