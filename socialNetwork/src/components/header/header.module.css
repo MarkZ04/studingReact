@@ -1,0 +1,12 @@
+.header {
+  padding: 20px;
+  display: flex;
+  justify-content: space-between;
+  grid-area: header;
+  background-color: aqua;
+}
+
+.logo {
+  max-height: 50px;
+  border-radius: 20px;
+}
