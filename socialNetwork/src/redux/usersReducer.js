@@ -1,3 +1,5 @@
+import { usersApi } from '../api';
+
 const USER_FOLLOW = 'USER_FOLLOW';
 const USER_NOFOLLOW = 'USER_NOFOLLOW';
 const SET_USERS = 'SET_USERS';
@@ -84,6 +86,7 @@ export const usersReducer = (state = initialState, action) => {
   }
 };
 
+// ActionCreators
 export const followAC = (userId) => {
   return {
     type: USER_FOLLOW,
@@ -125,3 +128,37 @@ export const toggleFollowingInProgressAC = (userId, inProgress) => ({
   userId,
   inProgress,
 });
+
+// ThunkCreators
+export const getUsersTC = (currentUsersPage, usersCount) => {
+  return (dispatch) => {
+    dispatch(toggleIsFetchingAC(true));
+
+    usersApi.getUsers(currentUsersPage, usersCount).then((data) => {
+      dispatch(toggleIsFetchingAC(false));
+      dispatch(setUsersAC(data.items));
+      dispatch(setUsersTotalCountAC(data.totalCount));
+    });
+  };
+};
+export const nofollowTC = (userId) => {
+  return (dispatch) => {
+    dispatch(toggleFollowingInProgressAC(userId, true));
+    usersApi.nofollow(userId).then((data) => {
+      if (data.resultCode === 0) dispatch(nofollowAC(userId));
+
+      dispatch(toggleFollowingInProgressAC(userId, false));
+    });
+  };
+};
+export const followTC = (userId) => {
+  return (dispatch) => {
+    dispatch(toggleFollowingInProgressAC(userId, true));
+
+    usersApi.follow(userId).then((data) => {
+      if (data.resultCode === 0) dispatch(followAC(userId));
+
+      dispatch(toggleFollowingInProgressAC(userId, false));
+    });
+  };
+};

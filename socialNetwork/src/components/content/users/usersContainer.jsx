@@ -1,68 +1,55 @@
 import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 import {
-  followAC,
-  nofollowAC,
-  setUsersAC,
-  setUsersTotalCountAC,
-  setCurrentUsersPageAC,
-  toggleIsFetchingAC,
-  toggleFollowingInProgressAC,
+	setCurrentUsersPageAC,
+	getUsersTC,
+	nofollowTC,
+	followTC,
 } from '../../../redux/usersReducer';
 import { Users } from './users';
 import { Preloader } from '../../common/preloader';
-import { usersApi } from '../../../api';
 
 const UsersContainer = (props) => {
-  useEffect(() => {
-    props.toggleIsFetchingAC(true);
-    usersApi.getUsers(props.currentUsersPage, props.usersCount).then((data) => {
-      props.toggleIsFetchingAC(false);
-      props.setUsersAC(data.items);
-      props.setUsersTotalCountAC(data.totalCount);
-    });
-  }, [props.currentUsersPage, props.usersCount]);
+	useEffect(() => {
+		props.getUsersTC(props.currentUsersPage, props.usersCount);
+	}, [props.currentUsersPage, props.usersCount]);
 
-  return (
-    <>
-      {props.isFetching ? (
-        <Preloader />
-      ) : (
-        <Users
-          totalCount={props.totalCount}
-          usersCount={props.usersCount}
-          setCurrentUsersPageAC={props.setCurrentUsersPageAC}
-          nofollowAC={props.nofollowAC}
-          followAC={props.followAC}
-          users={props.users}
-          isFetching={props.isFetching}
-          followingInProgress={props.followingInProgress}
-          toggleFollowingInProgressAC={props.toggleFollowingInProgressAC}
-        />
-      )}
-    </>
-  );
+	return (
+		<>
+			{props.isFetching ? (
+				<Preloader />
+			) : (
+				<Users
+					users={props.users}
+					totalCount={props.totalCount}
+					usersCount={props.usersCount}
+					setCurrentUsersPageAC={props.setCurrentUsersPageAC}
+					isFetching={props.isFetching}
+					followingInProgress={props.followingInProgress}
+					nofollowTC={props.nofollowTC}
+					followTC={props.followTC}
+				/>
+			)}
+		</>
+	);
 };
 
 let mapStateToProps = (state) => {
-  return {
-    users: state.usersPage.users,
-    currentUsersPage: state.usersPage.currentUsersPage,
-    usersCount: state.usersPage.usersCount,
-    totalCount: state.usersPage.totalCount,
-    isFetching: state.usersPage.isFetching,
-    followingInProgress: state.usersPage.followingInProgress,
-  };
+	return {
+		users: state.usersPage.users,
+		currentUsersPage: state.usersPage.currentUsersPage,
+		usersCount: state.usersPage.usersCount,
+		totalCount: state.usersPage.totalCount,
+		isFetching: state.usersPage.isFetching,
+		followingInProgress: state.usersPage.followingInProgress,
+	};
 };
 
 export default connect(mapStateToProps, {
-  followAC,
-  nofollowAC,
-  setUsersAC,
-  setUsersTotalCountAC,
-  setCurrentUsersPageAC,
-  toggleIsFetchingAC,
-  toggleFollowingInProgressAC,
+	setCurrentUsersPageAC,
+	getUsersTC,
+	nofollowTC,
+	followTC,
 })(UsersContainer);
 
 // let mapDispatchToProps = (dispatch) => {
