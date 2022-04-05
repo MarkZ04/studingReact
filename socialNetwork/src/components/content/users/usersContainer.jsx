@@ -8,30 +8,15 @@ import {
 } from '../../../redux/usersReducer';
 import { Users } from './users';
 import { Preloader } from '../../common/preloader';
+import { compose } from 'redux';
+import { withAuthRedirect } from '../../../hoc/withAuthRedirect';
 
 const UsersContainer = (props) => {
 	useEffect(() => {
 		props.getUsersTC(props.currentUsersPage, props.usersCount);
 	}, [props.currentUsersPage, props.usersCount]);
 
-	return (
-		<>
-			{props.isFetching ? (
-				<Preloader />
-			) : (
-				<Users
-					users={props.users}
-					totalCount={props.totalCount}
-					usersCount={props.usersCount}
-					setCurrentUsersPageAC={props.setCurrentUsersPageAC}
-					isFetching={props.isFetching}
-					followingInProgress={props.followingInProgress}
-					nofollowTC={props.nofollowTC}
-					followTC={props.followTC}
-				/>
-			)}
-		</>
-	);
+	return <>{props.isFetching ? <Preloader /> : <Users {...props} />}</>;
 };
 
 let mapStateToProps = (state) => {
@@ -45,12 +30,15 @@ let mapStateToProps = (state) => {
 	};
 };
 
-export default connect(mapStateToProps, {
-	setCurrentUsersPageAC,
-	getUsersTC,
-	nofollowTC,
-	followTC,
-})(UsersContainer);
+export default compose(
+	withAuthRedirect,
+	connect(mapStateToProps, {
+		setCurrentUsersPageAC,
+		getUsersTC,
+		nofollowTC,
+		followTC,
+	})
+)(UsersContainer);
 
 // let mapDispatchToProps = (dispatch) => {
 //   return {

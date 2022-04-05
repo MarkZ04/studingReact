@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 import { Header } from './header';
 import { getAuthTC } from '../../redux/authReducer';
+import { Login } from '../content/login';
 
 const HeaderContainer = (props) => {
 	useEffect(() => {

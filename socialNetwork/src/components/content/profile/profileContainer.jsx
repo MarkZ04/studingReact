@@ -4,6 +4,8 @@ import { useParams } from 'react-router-dom';
 import { getProfileTC } from '../../../redux/profileReducer';
 import { Profile } from './profile';
 import { Preloader } from '../../common/preloader/preloader';
+import { withAuthRedirect } from '../../../hoc/withAuthRedirect';
+import { compose } from 'redux';
 
 const ProfileContainer = (props) => {
 	let { userId } = useParams();
@@ -29,4 +31,7 @@ let mapStateToProps = (state) => {
 	};
 };
 
-export default connect(mapStateToProps, { getProfileTC })(ProfileContainer);
+export default compose(
+	withAuthRedirect,
+	connect(mapStateToProps, { getProfileTC })
+)(ProfileContainer);

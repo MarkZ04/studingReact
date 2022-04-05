@@ -32,6 +32,10 @@ export const setAuthUserDataAC = (userData) => ({
 // Thunk Creators
 export const getAuthTC = () => {
 	return (dispatch) => {
-		authApi.getAuth().then((data) => dispatch(setAuthUserDataAC(data.data)));
+		authApi.getAuth().then((data) => {
+			if (data.resultCode === 0) {
+				dispatch(setAuthUserDataAC(data.data));
+			}
+		});
 	};
 };
